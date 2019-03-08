@@ -1,2 +1,2 @@
-# WQPgitpagesourcecode
-Soruce code created by Brad for the Goal 1 workgroup. Testing the utility and reality of states using this for their our gitpages. 
+# wqp_github_page_ex
+A simple example of how to use GitHub Pages to host a WQP related example.

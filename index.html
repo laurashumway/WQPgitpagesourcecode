@@ -1,0 +1,54 @@
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function doFunction() {
+    var siteid = $("#siteid").val();
+
+    var ws =
+      "https://www.waterqualitydata.us/data/summary/monitoringlocation/search?mimeType=geojson&zip=no&siteid=" +
+      siteid;
+
+    $("#datatxt").html("Calling web service");
+    $("#label").html("Loading");
+    $("#value").html("Loading");
+    $("#lon-lat").html("Loading");
+
+    $.getJSON(ws, function(data) {
+      //console.log(data);
+
+      $("#datatxt").html(JSON.stringify(data));
+
+      $("#label").html(data.type);
+      $("#value").html(data.features[0].properties.resultCount);
+      $("#lon-lat").html(data.features[0].geometry.coordinates.toString());
+    }).fail(function() {
+      console.log("error");
+      $("#label").html("error");
+      $("#value").html("error");
+    });
+  }
+</script>
+
+</head>
+<body>
+
+  <input type="text" id='siteid' value='USGS-390551077342301'>
+  <input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
+
+  </br>
+
+  <textarea id="datatxt" rows="24" cols="150"></textarea>
+  </br>
+
+  Label: <span id="label"></span>
+  </br>
+
+  Value: <span id="value"></span>
+  </br>
+
+  Lon/Lat: <span id="lon-lat"></span>
+
+</body>
+</html>
